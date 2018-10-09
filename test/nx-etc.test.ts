@@ -1,14 +1,12 @@
-import DummyClass from '../src/nx-etc'
+import { extractAppNames, getDependencies } from '../src/nx-etc';
+import { getProjectNodes } from '@nrwl/schematics/src/command-line/shared';
 
-/**
- * Dummy test
- */
-describe('Dummy test', () => {
-  it('works if true is truthy', () => {
-    expect(true).toBeTruthy()
-  })
+jest.mock('@nrwl/schematics/src/command-line/affected-apps');
 
-  it('DummyClass is instantiable', () => {
-    expect(new DummyClass()).toBeInstanceOf(DummyClass)
-  })
-})
+describe('nx-etc checkout', () => {
+  describe('extractAppNames', () => {
+    it('should remove the first argument from the array', () => {
+      expect(extractAppNames(['a', 'b', 'c'])).toEqual(['b', 'c']);
+    });
+  });
+});
