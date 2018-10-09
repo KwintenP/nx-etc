@@ -63,10 +63,6 @@ const reduceProjectsNotToCheckout = (
   allProjectsToCheckout: string[]
 ) =>
   Object.entries(projects)
-    .map(test => {
-      console.log(test);
-      return test;
-    })
     .map(([name, project]) => ({ name, type: project.projectType }))
     .filter(
       (project: { name: string; type: string }) => !allProjectsToCheckout.includes(project.name)
@@ -84,7 +80,6 @@ const calculateSparseCheckoutFileContent = (
   );
 
 const checkoutApp = (appNames: string[]) => {
-  console.log(execSync('git status').toString('utf-8'));
   if (!verifySparseCheckoutEnabled()) {
     console.log("Enable sparce checkouts first by running 'git config core.sparseCheckout true'");
     process.exit(1);
@@ -104,8 +99,6 @@ const checkoutApp = (appNames: string[]) => {
     getDependencies(angularJson, nxJson),
     appNames
   );
-
-  console.log(JSON.stringify(allProjectsToCheckout));
 
   writeContent(
     SPARSE_CHECKOUT_PATH,
