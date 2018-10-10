@@ -113,7 +113,7 @@ const cli = yargs
   .usage('Utility of nx helper scripts')
   .command(
     'checkout',
-    'Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout',
+    "Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout as follows 'nx-etc checkout ${appName} ${appName2'. To checkout everything, call it without app names.",
     (yargsOptions: any) => yargsOptions,
     (args: any) => checkoutApp(extractAppNames(args._))
   )
