@@ -19,7 +19,8 @@ Reasons I want to avoid this is:
 
 #### Sparse checkouts
 
-Git supports a feature called [sparse checkouts](https://git-scm.com/docs/git-read-tree#_sparse_checkout). In this scenario, you can create a file called 'sparse-checkout' where, using some globs, you can instruct git which folders to checkout and which ones to 'hide'.
+Git supports a feature called [sparse checkouts](https://git-scm.com/docs/git-read-tree#_sparse_checkout). In this scenario, you can create a file called 'sparse-checkout' where, using some globs, you can instruct git which folders to checkout and which ones to **'hide'**. This means the folders are not visible on the file system!
+
 
 #### Dependency graph scripts from Nx
 
@@ -39,6 +40,8 @@ or
  
 ```npm install --save-dev nx-etc```
 
+**Note:** We avoid having this installed globally, as we do with (almost) any package.
+
 #### Enable sparse checkouts
 
 First of all, you need to enable sparse checkouts. Do this using
@@ -50,6 +53,8 @@ First of all, you need to enable sparse checkouts. Do this using
 To checkout one project use:
 
 ```npx nx-etc checkout ${appName}```
+
+**Note:** When checking out an app, with dependant libs, the other libs and apps will be hidden! See below to checkout everything again.
 
 To checkout multiple projects use:
 
