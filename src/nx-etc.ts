@@ -1,4 +1,8 @@
-import { getProjectNodes, readAngularJson, readNxJson } from '@nrwl/schematics/src/command-line/shared';
+import {
+  getProjectNodes,
+  readAngularJson,
+  readNxJson
+} from '@nrwl/schematics/src/command-line/shared';
 import { dependencies, Deps, ProjectNode } from '@nrwl/schematics/src/command-line/affected-apps';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
@@ -47,8 +51,7 @@ const verifySparseCheckoutEnabled = () =>
       .trim()
   ) || execSync('git config core.sparseCheckout').toString('utf-8').length !== 0;
 
-const verifyGitStatusClean = () =>
-  execSync('git status -s').toString('utf-8').length === 0;
+const verifyGitStatusClean = () => execSync('git status -s').toString('utf-8').length === 0;
 
 const reduceAllProjectsToCheckout = (deps: Deps, appNames: string[]) =>
   appNames.reduce<string[]>((acc, appName) => {
@@ -81,7 +84,7 @@ const calculateSparseCheckoutFileContent = (
 
 const checkoutApp = (appNames: string[]) => {
   if (!verifySparseCheckoutEnabled()) {
-    console.log('Enable sparce checkouts first by running \'git config core.sparseCheckout true\'');
+    console.log("Enable sparce checkouts first by running 'git config core.sparseCheckout true'");
     process.exit(1);
   }
   if (!verifyGitStatusClean()) {
@@ -92,6 +95,7 @@ const checkoutApp = (appNames: string[]) => {
   checkoutEverything();
 
   if (!appNames.length) {
+    console.log('No app names passed, checked out everything.');
     return;
   }
 
@@ -102,6 +106,9 @@ const checkoutApp = (appNames: string[]) => {
     getDependencies(angularJson, nxJson),
     appNames
   );
+
+  console.log('Analysed the dep graph and checking out the following apps and libs');
+  console.log(allProjectsToCheckout.join(', '));
 
   writeContent(
     SPARSE_CHECKOUT_PATH,
@@ -116,7 +123,7 @@ const cli = yargs
   .usage('Utility of nx helper scripts')
   .command(
     'checkout',
-    'Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout as follows \'nx-etc checkout ${appName} ${appName2\'. To checkout everything, call it without app names.',
+    "Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout as follows 'nx-etc checkout ${appName} ${appName2'. To checkout everything, call it without app names.",
     (yargsOptions: any) => yargsOptions,
     (args: any) => checkoutApp(extractAppNames(args._))
   )
