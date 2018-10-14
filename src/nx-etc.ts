@@ -83,9 +83,14 @@ const calculateSparseCheckoutFileContent = (
   );
 
 const checkoutApp = (appNames: string[]) => {
-  if (!verifySparseCheckoutEnabled()) {
-    console.log("Enable sparce checkouts first by running 'git config core.sparseCheckout true'");
-    process.exit(1);
+  try {
+    if (!verifySparseCheckoutEnabled()) {
+      console.log("Enable sparce checkouts first by running 'git config core.sparseCheckout true'");
+      process.exit(1);
+    }
+  } catch (e) {
+    console.log('Checking sparse checkouts available failed, did you already enable it?');
+    console.log("Enable sparce checkouts by running 'git config core.sparseCheckout true'");
   }
   if (!verifyGitStatusClean()) {
     console.log('Please make sure that you have no untracked or unstaged changes.');
@@ -123,7 +128,7 @@ const cli = yargs
   .usage('Utility of nx helper scripts')
   .command(
     'checkout',
-    "Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout as follows 'nx-etc checkout ${appName} ${appName2'. To checkout everything, call it without app names.",
+    "Checks out all the apps passed to it and all of the dependant libs. Pass the names of the apps to checkout as follows 'nx-etc checkout ${appName} ${appName2}'. To checkout everything, call it without app names.",
     (yargsOptions: any) => yargsOptions,
     (args: any) => checkoutApp(extractAppNames(args._))
   )
