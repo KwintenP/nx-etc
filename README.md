@@ -63,3 +63,8 @@ To checkout multiple projects use:
 To checkout everything use:
 
 ```npx nx-etc checkout```
+
+#### Video tutorial
+
+<iframe src="https://player.vimeo.com/video/295018577" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/295018577">Using nx-etc checkout feature</a> from <a href="https://vimeo.com/user79085465">Kwinten Pisman</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
