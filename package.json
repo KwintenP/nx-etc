@@ -83,7 +83,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.1",
-    "@nrwl/schematics": "^6.3.0",
+    "@nrwl/schematics": "^7.0.0",
     "@types/app-root-path": "^1.2.4",
     "@types/jest": "^22.0.0",
     "@types/node": "^10.0.3",
