@@ -78,7 +78,7 @@
     "yargs": "^12.0.2"
   },
   "peerDependencies": {
-    "@nrwl/schematics": "^6.3.0"
+    "@nrwl/schematics": "^7.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.0.0",
